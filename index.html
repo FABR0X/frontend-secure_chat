@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CIA Secure Chat</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Screen 1: log in against LDAP -->
+  <section id="login-screen">
+    <h1>Secure Chat <span>CIA</span></h1>
+    <p class="subtitle">LDAP authentication (Encryption, signing and integrity verification)</p>
+    <form id="login-form">
+      <label>Username
+        <input id="login-username" type="text" placeholder="e.g. juan" required maxlength="64" autocomplete="username">
+      </label>
+      <label>Password
+        <input id="login-password" type="password" placeholder="Your LDAP password" required autocomplete="current-password">
+      </label>
+      <button type="submit">Login</button>
+      <div id="login-error" class="join-error hidden"></div>
+    </form>
+  </section>
+
+  <!-- Screen 2: chat with the collapsible conversation sidebar -->
+  <section id="chat-screen" class="hidden">
+    <button id="toggle-sidebar" title="Show/hide chats" aria-label="Toggle chats">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+        <polyline points="12 5 19 12 12 19"></polyline>
+      </svg>
+    </button>
+
+    <aside id="sidebar">
+      <div class="sidebar-top">
+        <span id="current-user">@</span>
+        <button id="logout-btn" class="link-btn">Logout</button>
+      </div>
+      <input id="chat-search" type="text" placeholder="Search users..." autocomplete="off" maxlength="64">
+      <div id="sidebar-label" class="sidebar-label">My chats</div>
+      <ul id="chat-list"></ul>
+      <p id="no-chats" class="empty hidden">No chats yet</p>
+      <p id="no-results" class="empty hidden">No users match your search</p>
+    </aside>
+
+    <main id="conversation">
+      <header id="conversation-header">
+        <h2 id="conversation-title">Select a chat</h2>
+      </header>
+      <div id="messages" aria-live="polite"></div>
+      <div id="banner" class="banner hidden"></div>
+      <form id="message-form">
+        <input id="message-input" type="text" placeholder="Select a chat to start messaging" autocomplete="off" maxlength="500" disabled>
+        <button type="submit" disabled>Send</button>
+      </form>
+    </main>
+  </section>
+
+  <!-- Logout confirmation -->
+  <div id="logout-modal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-box">
+      <p>Are you sure you want to log out?</p>
+      <div class="modal-actions">
+        <button id="logout-cancel" class="ghost-btn">Cancel</button>
+        <button id="logout-confirm">Log out</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

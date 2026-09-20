@@ -1,0 +1,6 @@
+# Render config.js from this template. At container startup (and periodically,
+# while the loop below runs) it reads the CURRENT API secret so that after a
+# rotation the browser receives a fresh, valid value on the next page load.
+window.APP_CONFIG = {
+    apiKey: "${API_SECRET}"
+};
